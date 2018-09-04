@@ -1,0 +1,106 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class HelloWorld{
+    static Integer nodeNumber= 0;
+
+    public static void main(String []args){
+        
+        Scanner input = new Scanner(System.in);
+    	
+    	System.out.print("Enter Timestamp: ");
+    	String timestamp = input.next();
+    	System.out.println("Timestamp entered = " + timestamp);
+    
+        System.out.print("Enter Data:- ");
+        
+    	System.out.print("    Enter Owner Id: ");
+    	String ownerid = input.next();
+    	System.out.println("    Owner Id = " + timestamp);
+    	
+    	System.out.print("    Enter Value: ");
+    	String value = input.next();
+    	System.out.println("    Value = " + timestamp);
+    	
+    	System.out.print("    Enter Owner Name: ");
+    	String ownerName = input.next();
+    	System.out.println("    Owner Name = " + timestamp);
+    	
+    	String data = dataHash(ownerid, value, ownerName);
+    	
+    	
+    	increment();
+    	System.out.println("Node Number entered = " + nodeNumber);
+    	
+    	System.out.print("Enter Node ID: ");
+    	String nodeId = input.next();
+    	System.out.println("Node ID entered = " + nodeId);
+    	
+    	System.out.print("Enter Reference Node ID: ");
+    	String referenceNodeId = input.next();
+    	System.out.println("Reference Node ID entered = " + referenceNodeId);
+    	
+    	System.out.print("Enter Child Reference Node ID: ");
+    	String childReferenceNodeId = input.next();
+    	System.out.println("Child Reference Node ID entered = " + childReferenceNodeId);
+    	
+    	System.out.print("Enter Genesis Reference Node ID: ");
+    	String genesisRefenceNodeId = input.next();
+    	System.out.println("Genesis Reference Node ID entered = " + genesisRefenceNodeId);
+    	
+    	System.out.print("Enter Hash Value: ");
+    	String HashValue = input.next();
+    	System.out.println("Hash Value entered = " + HashValue);
+    	
+    	createNode(timestamp, data, 
+                          nodeNumber,nodeId, 
+                          referenceNodeId, 
+                          childReferenceNodeId, 
+	                      genesisRefenceNodeId, 
+	                      HashValue);
+    }
+    
+    public static void createNode (String timestamp, String data, 
+                           Integer nodeNumber, String nodeId, 
+                           String referenceNodeId, 
+                           String childReferenceNodeId, 
+	                       String genesisRefenceNodeId, 
+	                       String HashValue)
+	{
+	    HashMap<String, String> node = new HashMap<>();
+         
+        node.put("timestamp", timestamp);
+        node.put("data", data);
+        node.put("nodeNumber",  nodeNumber.toString());
+        node.put("nodeId", nodeId);
+        node.put("referenceNodeId", referenceNodeId);
+        node.put("childReferenceNodeId",  childReferenceNodeId);
+        node.put("genesisRefenceNodeId", genesisRefenceNodeId);
+        node.put("HashValue", HashValue);
+         
+        System.out.println("Node is :- " + node);
+        
+        addNode(nodeNumber,nodeId,node);
+     
+	}
+	
+	public static void addNode(Integer nodeNumber,String nodeId,
+	                    HashMap<String, String> node)
+    {
+       HashMap<Integer, HashMap<String, String>> parentMap = new HashMap<>();
+         
+        parentMap.put(nodeNumber, node);
+    }
+    
+    public static void increment()
+    {
+      nodeNumber++;
+    }
+    
+    public static String dataHash(String ownerid,String value,String ownerName )
+    {
+      return ownerid+value+ownerName;
+    }
+     
+}
